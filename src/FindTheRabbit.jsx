@@ -16,15 +16,15 @@ const FindTheRabbit = ({
   useEffect(() => {
     const intervalMs = 1000 / refreshRateHz;
     intervalHandler = setInterval(() => {
-      console.log('intervalHandler');
       if (guessPos === rabbitPos) {
         clearInterval(intervalHandler);
       } else {
+
         let newHoles = Array(numHoles).fill("h")
-        newHoles[rabbitPos] = "r";
+        const newRabbitPos = moveRabbit();
+        newHoles[newRabbitPos] = "r";
         newHoles[guessPos] = "g";
         setHoles(newHoles);
-        moveRabbit();
       }
     }, intervalMs); // --- todo clear handle
   }, []);
@@ -32,19 +32,25 @@ const FindTheRabbit = ({
 
   const moveRabbit = () => {
     const rand = Math.random();
+    let newRabbitPos
     console.log(`rabbit pos : ${rabbitPos}`);
 
     if (rand < 0.5) {
       //--left
       if (rabbitPos > 0) {
-        setRabbitPos(rabbitPos - 1);
+        newRabbitPos = rabbitPos - 1
       }
     } else {
       //--right
       if (rabbitPos < numHoles - 1) {
-        setRabbitPos(rabbitPos + 1);
+        newRabbitPos = rabbitPos + 1;
+        
       }
     }
+    setRabbitPos(newRabbitPos);
+
+    console.log(`newRabbitPos : ${newRabbitPos}`);
+    return newRabbitPos;
   };
 
   const getItemUI = (item) => {
@@ -72,7 +78,7 @@ const FindTheRabbit = ({
   return (
     <>
       {holesElements}
-      <p>rabbitPos : {rabbitPos}</p>
+      <p>rabbitPos : {rabbitPos} , refreshRateHz : {refreshRateHz}</p>
       {gameOver}
       <button onClick={() => clearInterval(intervalHandler)}>Stop</button>
     </>
