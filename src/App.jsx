@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className="App">
-      <FindTheRabbit initialRabbitPos={10} refreshRateHz={0.5}/>
+      <FindTheRabbit initialRabbitPos={6} refreshRateHz={0.5}/>
     </div>
   )
 }
