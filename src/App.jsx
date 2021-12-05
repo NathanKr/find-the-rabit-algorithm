@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className="App">
-      <FindTheRabbit numHoles={10} initialRabbitPos={4} initialGuessPos={2} refreshRateHz={0.5}/>
+      <FindTheRabbit initialRabbitPos={10} refreshRateHz={0.5}/>
     </div>
   )
 }
